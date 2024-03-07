@@ -1,4 +1,5 @@
 #include "globals.h"
+#include <string>
 
 int compareMath(Student student1, Student student2)
 {
@@ -30,9 +31,10 @@ int compareAverage(Student student1, Student student2)
 
 int compareNames(Student student1, Student student2)
 {
-	if (student1.getName() < student2.getName()) return -1;
-	else if (student1.getName() > student2.getName()) return 1;
-	else return 0;
+	//if (student1.getName() < student2.getName()) return -1;
+	//else if (student1.getName() > student2.getName()) return 1;
+	//else return 0;
+	return student1.getName().compare(student2.getName());
 }
 
 
