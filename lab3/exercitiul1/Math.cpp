@@ -1,7 +1,7 @@
 #include "Math.h"
 #include <cstring>
 #include <cstdarg>
-
+#include <iostream>
 int Math::Add(int a, int b)
 {
 	return a+b;
@@ -58,22 +58,45 @@ int Math::Add(int count, ...)
 
 char* Math::Add(const char* nr1, const char* nr2)
 {
-	char t;
-	int v;
-	int c = 0;
-	int size3;
-	int size1 = strlen(nr1);
-	int size2 = strlen(nr2);
-	if (size1 > size2)
-		size3 = size1+1;
-	else size3 = size2+1;
-	char* rez = new char[size3];
-	size3--;
-	for (int i = size3; i >= 0; i--) {
-		v = c + (nr1[i - 1]+nr2[i-1] - '0');
-		if (v > 9)c = v / 10;
-		rez[i+1] = char(v % 10);
+	int carry = 0, a, b, t = 0, size3, size1 = 0, size2 = 0;
+	for (int i = 0; nr1[i]; i++)
+		size1++;
+	for (int i = 0; nr2[i]; i++)
+		size2++;
+
+	if (size1 < size2)size3 = size2;
+	else size3 = size1;
+	char* nr3 = new char[size3 + 1];
+
+	int i, j;
+	if (size1 >= size2) {
+		for (i = size1 - 1, j = size2 - 1; i >= 0; i--, j--) {
+			a = b = 0;
+			if (nr1[i] >= '0' && nr1[i] <= '9')a = nr1[i] - '0';
+			if (nr2[j] >= '0' && nr2[j] <= '9')b = nr2[j] - '0';
+			t = t + a + b;	
+			nr3[i + 1] = char(t % 10 + '0');
+			t = t / 10;
+		}
 	}
-	
-	return rez;
+	else {
+		for (i = size1 - 1, j = size2 - 1; j >= 0; i--, j--) {
+			a = b = 0;
+			if (nr1[i] >= '0' && nr1[i] <= '9')a = nr1[i] - '0';
+			if (nr2[j] >= '0' && nr2[j] <= '9')b = nr2[j] - '0';
+			t = t + a + b;
+			nr3[j + 1] = char(t % 10 + '0');
+			t = t / 10;
+		}
+	}
+	if (t)nr3[0] = '1', carry = 1;
+
+	if (carry == 0) {
+		for (i = 0; i < size3; i++)
+			nr3[i] = nr3[i + 1];
+		nr3[size3] = '\0';
+	}
+	else nr3[size3 + 1] = '\0';
+
+	return nr3;
 }
