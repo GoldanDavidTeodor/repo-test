@@ -102,8 +102,7 @@ Number::Number(const Number&& n) { //move constructor
 		this->valoare[j] = n.valoare[j];
 	valoare[i] = '\0';
 	this->baza = n.baza;
-	n.baza=NULL;
-	n.valoare=nullptr;
+
 }
 
 void Number::operator--() {
