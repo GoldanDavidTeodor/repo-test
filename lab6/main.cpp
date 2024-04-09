@@ -38,5 +38,5 @@ int main()
 	c.ShowFinalRanks(); 
 	c.ShowWhoDidNotFinish(); 
 	return 0;
->>>>>>> 213d2f5e7ac5de0bbbbcc8a7391d0736a1733357
+
 }

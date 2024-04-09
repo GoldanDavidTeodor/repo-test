@@ -192,5 +192,5 @@ void Circuit::ShowWhoDidNotFinish()
 			cout << cars[i]->GetName() << endl;
 		}
 	}
->>>>>>> 213d2f5e7ac5de0bbbbcc8a7391d0736a1733357
+
 }
