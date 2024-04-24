@@ -45,8 +45,12 @@ public:
     }
 
     Node<T>* get_node(Node<T>* parent) {
-        return parent ? parent->child : root;
-    }
+    if (parent)
+        return parent->child;
+    else
+        return root;
+}
+
 
     void delete_node(Node<T>* node) {
         if (!node) return;
@@ -54,7 +58,7 @@ public:
         delete node;
     }
 
-private:
+
     void delete_subtree(Node<T>* node) {
         if (!node) return;
         delete_subtree(node->nextSibling);
