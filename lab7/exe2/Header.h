@@ -5,9 +5,9 @@ template <typename T>
 struct Node {
     T info;
     Node<T>* child;
-    Node<T>* nextSibling;
+    Node<T>* sibling;
 
-    Node(T info) : info(info), child(nullptr), nextSibling(nullptr) {}
+    Node(T info) : info(info), child(nullptr), sibling(nullptr) {}
 };
 
 template<typename T>
@@ -37,9 +37,9 @@ public:
                 parent->child = new_node;
             else {
                 Node<T>* temp = parent->child;
-                while (temp->nextSibling)
-                    temp = temp->nextSibling;
-                temp->nextSibling = new_node;
+                while (temp->sibling)
+                    temp = temp->sibling;
+                temp->sibling = new_node;
             }
         }
     }
@@ -61,7 +61,7 @@ public:
 
     void delete_subtree(Node<T>* node) {
         if (!node) return;
-        delete_subtree(node->nextSibling);
+        delete_subtree(node->sibling);
         delete_subtree(node->child);
         delete node;
     }
